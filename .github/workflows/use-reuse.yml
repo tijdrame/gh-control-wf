@@ -74,6 +74,13 @@ jobs:
       artifact-name: dist-files
     #secrets:
       # some-secret: ${{ secrets.SOME_SECRET }}
+  print-deploy-result:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output deploy result
+        run: |
+          echo "Deploy result: ${{ needs.deploy.outputs.result }}"
   report:
     needs: [lint, deploy]
     if: failure()
